@@ -1,7 +1,6 @@
-<?= $this->extend('Master') ?>
+<?= $this->extend('_LayoutsAdmin/Master') ?>
 <?= $this->section('content') ?>
-    <style>
-        /* CSS untuk mengatur tata letak kolom */
+<style>
         .bukutamu-container {
             display: flex;
             justify-content: space-between;
@@ -9,10 +8,9 @@
 
         .form-container,
         .table-container {
-            width: 48%; /* Sesuaikan lebar kolom sesuai kebutuhan */
+            width: 100%;
         }
 
-        /* Tambahkan gaya tambahan sesuai kebutuhan Anda */
         .table-container table {
             width: 100%;
             border-collapse: collapse;
@@ -25,31 +23,9 @@
             text-align: left;
         }
     </style>
-        <div class="container px-4 py-5 mt-5">
+<div class="container px-4 py-5 mt-5">
             <div class="bukutamu-container">
-                <!-- Form Bukutamu -->
-                <div class="form-container">
-                    <h2 class="fw-bold text-body-emphasis">Bukutamu</h2>
-                    <p class="text-body-secondary">Selamat datang di Bukutamu Hildan University! Silakan tinggalkan jejak dan berikan tanggapan atau kesan Anda tentang pengalaman di universitas ini. Kami sangat menghargai setiap masukan dari Anda.</p>
 
-                    <form action="/kirim-bukutamu" method="post">
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Nama:</label>
-                            <input type="text" class="form-control" id="nama" name="nama" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Email:</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pesan" class="form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
-                    </form>
-                </div>
-
-                <!-- Tabel Pesan Tamu -->
                 <div class="table-container">
                 <?php if (session()->has('success')) : ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -68,16 +44,23 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Email</th>
                                 <th>Nama</th>
                                 <th>Pesan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php foreach($data as $datas) : ?>
                             <tr>
                                 <td><?= $datas['id'] ?></td>
+                                <td><?= $datas['email'] ?></td>
                                 <td><?= $datas['nama'] ?></td>
                                 <td><?= $datas['pesan'] ?></td>
+                                <td>
+                                    <a href="" class="btn btn-success">Edit</a>
+                                    <a href="" class="btn btn-danger">Hapus</a>
+                                </td>
                             </tr>
                         <?php endforeach ?>
                         </tbody>
